@@ -5,6 +5,11 @@ import java.io.*;
 import java.sql.SQLException;
 public class Atm extends AccountDetails
 {
+	/* 
+		To connect java application with the mysql database, mysqlconnector.jar file is required to be loaded.
+		Link : https://static.javatpoint.com/src/jdbc/mysql-connector.jar
+	*/
+
 		//Account Detail
 	static String userName;
 	static int userAcc;
