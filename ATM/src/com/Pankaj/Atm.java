@@ -1,15 +1,13 @@
-package com.Pankaj;
-
+/*
+ *
+ * @author PANKAJ-RATHOR
+ *
+ */
 import java.util.*;
 import java.io.*;
 import java.sql.SQLException;
-public class Atm extends AccountDetails
+public class Atm
 {
-	/* 
-		To connect java application with the mysql database, mysqlconnector.jar file is required to be loaded.
-		Link : https://static.javatpoint.com/src/jdbc/mysql-connector.jar
-	*/
-
 		//Account Detail
 	static String userName;
 	static int userAcc;
@@ -28,17 +26,46 @@ public class Atm extends AccountDetails
 		accountType();
 	}
 	
+	public static void accountType()
+	{	
+		System.out.println("Select Account Type. \n 1.Saving Account \n 2.CurrentAccount \n 3.Cancel");
+		select = input();
+		if(select==1)
+		{
+			accType = "savingaccount";
+			try {
+				Authentications();
+			} catch (NumberFormatException | IOException | SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(select==2)
+		{
+			accType = "currentaccount";
+			try {
+				Authentications();
+			} catch (NumberFormatException | IOException | SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			s.close();
+			System.exit(0);
+		}
+	}
+	
 	public static void Authentications() throws NumberFormatException, IOException, SQLException
 	{
 		AccountDetails Ad = new AccountDetails();
-		System.out.print("Enter Account Number  : ");
-		int accNO = input();
-		System.out.print("Enter Account Password : ");
-		int accPass = input();
-		
 		int Try=0;
 		while(Try<3)
 		{
+			System.out.print("Enter Account Number  : ");
+			int accNO = input();
+			System.out.print("Enter Account Password : ");
+			int accPass = input();
+			
 			Ad.searchAccount(accNO, accType );
 			userName=Ad.getName();
 			userAcc=Ad.getAccount();
@@ -57,36 +84,6 @@ public class Atm extends AccountDetails
 		}
 	}
 	
-	public static void accountType()
-	{	
-		System.out.println("Select Account Type. \n 1.Saving Account \n 2.CurrentAccount \n 3.Cancel");
-		select = input();
-		if(select==1)
-		{
-			accType = "savingaccount";
-			try {
-				Authentications();
-			} catch (NumberFormatException | IOException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		else if(select==2)
-		{
-			accType = "currentaccount";
-			try {
-				Authentications();
-			} catch (NumberFormatException | IOException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			System.exit(0);
-		}
-	}
-	
 	public static void operations() throws IOException, SQLException
 	{
 		System.out.println("Select Option. \n 1.Check \n 2.Withdraw \n 3.Cancel");
@@ -101,6 +98,7 @@ public class Atm extends AccountDetails
 		}
 		else
 		{
+			s.close();
 			System.exit(0);
 		}
 	}
@@ -166,6 +164,11 @@ public class Atm extends AccountDetails
 			}
 		}
 		else if(select==2)
+		{
+			s.close();
+			System.exit(0);
+		}
+		else
 		{
 			s.close();
 			System.exit(0);
